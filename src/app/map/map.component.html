@@ -1,1 +1,23 @@
-<p>map works!</p>
+<div class="map">
+  <img src="assets/img/mock-map.png" alt="" class="map__image" />
+  <div class="map__pin-holder" (click)="paintMarker($event)">
+    <ng-container *ngFor="let pin of pinCollection; let i = index">
+      <app-pin
+        [positionX]="pin.positionX"
+        [positionY]="pin.positionY"
+      ></app-pin>
+    </ng-container>
+
+    {{ positionX }}
+    <!-- <svg height="210" width="500">
+      <line
+        x1="0"
+        y1="0"
+        x2="200"
+        y2="200"
+        style="stroke:rgb(255,0,0);stroke-width:2"
+      />
+    </svg> -->
+  </div>
+  <button (click)="clearPins()">Clear Pins</button>
+</div>

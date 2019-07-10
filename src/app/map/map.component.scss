@@ -1,0 +1,20 @@
+@import "../../theme/mixins";
+@import "../../theme/variables";
+
+.map {
+  width: $appWidth;
+  position: relative;
+
+  .map__image {
+    width: $appWidth;
+  }
+
+  .map__pin-holder {
+    width: $appWidth;
+    height: 380px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+}
