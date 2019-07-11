@@ -10,8 +10,8 @@
   }
 
   .map__pin-holder {
-    width: $appWidth;
-    height: 380px;
+    width: $mapWidth;
+    height: $mapHeight;
     position: absolute;
     top: 0;
     left: 0;

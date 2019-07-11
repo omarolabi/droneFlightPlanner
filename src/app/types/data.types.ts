@@ -1,4 +1,11 @@
 export interface PinObject {
-  positionX: number;
-  positionY: number;
+  x: number;
+  y: number;
+}
+
+export interface PathCoordinates {
+  startX: number;
+  startY: number;
+  endX: number;
+  endY: number;
 }

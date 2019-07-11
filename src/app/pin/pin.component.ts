@@ -4,6 +4,7 @@ import {
   Input,
   ChangeDetectionStrategy
 } from '@angular/core';
+import { PinObject } from '../types/data.types';
 
 @Component({
   selector: 'app-pin',
@@ -12,17 +13,16 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PinComponent implements OnInit {
-  @Input() positionX: number;
-  @Input() positionY: number;
+  @Input() position: PinObject;
 
-  public pinPosition = {};
+  public styles = {};
 
   constructor() {}
 
   ngOnInit() {
-    this.pinPosition = {
-      'top.px': this.positionY,
-      'left.px': this.positionX
+    this.styles = {
+      'left.px': this.position.x,
+      'top.px': this.position.y
     };
   }
 }

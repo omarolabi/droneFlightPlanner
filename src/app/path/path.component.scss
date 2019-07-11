@@ -1,0 +1,13 @@
+@import "../../theme/mixins";
+@import "../../theme/variables";
+
+.path {
+  width: $mapWidth;
+  height: $mapHeight;
+  stroke: $mainColor;
+  stroke-width: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}

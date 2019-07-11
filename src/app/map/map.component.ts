@@ -4,7 +4,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef
 } from '@angular/core';
-import { PinObject } from '../types/data.types';
+import { PinObject, PathCoordinates } from '../types/data.types';
 
 @Component({
   selector: 'app-map',
@@ -13,22 +13,39 @@ import { PinObject } from '../types/data.types';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MapComponent implements OnInit {
-  public pinCollection: Array<PinObject> = [];
+  public pinPositions: Array<PinObject> = [];
+  public pathCoordinates: Array<PathCoordinates> = [];
 
   constructor(private cd: ChangeDetectorRef) {}
 
   ngOnInit() {}
 
   public paintMarker(event) {
-    const newPin: PinObject = {
-      positionX: event.x,
-      positionY: event.y
+    const newPinPosition: PinObject = {
+      x: event.x,
+      y: event.y
     };
-    this.pinCollection.push(newPin);
+    this.pinPositions.push(newPinPosition);
+    this.createNewPath(newPinPosition);
     this.cd.markForCheck();
   }
 
-  public clearPins() {
-    this.pinCollection = [];
+  public clearPinsAndPaths() {
+    this.pinPositions = [];
+    this.pathCoordinates = [];
+  }
+
+  private createNewPath(newPinPosition: PinObject) {
+    const pinCounter: number = this.pinPositions.length;
+    const oldPinPosition: PinObject = this.pinPositions[pinCounter - 2];
+    if (pinCounter > 1) {
+      const newPathCoordinates: PathCoordinates = {
+        startX: oldPinPosition.x,
+        startY: oldPinPosition.y,
+        endX: newPinPosition.x,
+        endY: newPinPosition.y
+      };
+      this.pathCoordinates.push(newPathCoordinates);
+    }
   }
 }

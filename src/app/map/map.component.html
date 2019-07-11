@@ -1,23 +1,15 @@
 <div class="map">
   <img src="assets/img/mock-map.png" alt="" class="map__image" />
   <div class="map__pin-holder" (click)="paintMarker($event)">
-    <ng-container *ngFor="let pin of pinCollection; let i = index">
-      <app-pin
-        [positionX]="pin.positionX"
-        [positionY]="pin.positionY"
-      ></app-pin>
-    </ng-container>
+    <app-pin
+      *ngFor="let pinPosition of pinPositions; let i = index"
+      [position]="pinPosition"
+    ></app-pin>
 
-    {{ positionX }}
-    <!-- <svg height="210" width="500">
-      <line
-        x1="0"
-        y1="0"
-        x2="200"
-        y2="200"
-        style="stroke:rgb(255,0,0);stroke-width:2"
-      />
-    </svg> -->
+    <app-path
+      *ngFor="let pathCoordinate of pathCoordinates; let i = index"
+      [coordinates]="pathCoordinate"
+    ></app-path>
   </div>
-  <button (click)="clearPins()">Clear Pins</button>
+  <button (click)="clearPinsAndPaths()">Clear Path</button>
 </div>
