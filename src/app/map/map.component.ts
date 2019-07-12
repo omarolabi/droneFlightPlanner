@@ -30,9 +30,13 @@ export class MapComponent implements OnInit {
     this.cd.markForCheck();
   }
 
-  public clearPinsAndPaths() {
+  public clearFlightPlan() {
     this.pinPositions = [];
     this.pathCoordinates = [];
+  }
+
+  public saveFlightPlan() {
+    console.log('guardar');
   }
 
   private createNewPath(newPinPosition: PinObject) {

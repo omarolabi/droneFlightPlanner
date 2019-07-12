@@ -11,5 +11,12 @@
       [coordinates]="pathCoordinate"
     ></app-path>
   </div>
-  <button (click)="clearPinsAndPaths()">Clear Path</button>
+  <app-button (buttonClick)="clearFlightPlan()">Clear</app-button>
+  <app-button
+    (buttonClick)="clearFlightPlan()"
+    [type]="'secondary'"
+    [disabled]="this.pinPositions.length <= 1"
+  >
+    Save
+  </app-button>
 </div>
