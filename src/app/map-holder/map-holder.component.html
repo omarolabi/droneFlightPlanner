@@ -1,22 +1,27 @@
-<div class="map">
-  <img src="assets/img/mock-map.png" alt="" class="map__image" />
-  <div class="map__pin-holder" (click)="paintMarker($event)">
+<div class="map-holder">
+  <img src="assets/img/mock-map.png" alt="" class="map-holder__image" />
+  <div class="map-holder__pin-holder" (click)="paintMarker($event)">
     <app-pin
       *ngFor="let pinPosition of pinPositions; let i = index"
       [position]="pinPosition"
     ></app-pin>
-
     <app-path
       *ngFor="let pathCoordinate of pathCoordinates; let i = index"
       [coordinates]="pathCoordinate"
     ></app-path>
   </div>
+  <app-button (buttonClick)="newFlightPlan()" [disabled]="editMode"
+    >New</app-button
+  >
   <app-button (buttonClick)="clearFlightPlan()">Clear</app-button>
   <app-button
-    (buttonClick)="clearFlightPlan()"
+    (buttonClick)="saveFlightPlan()"
     [type]="'secondary'"
     [disabled]="this.pinPositions.length <= 1"
   >
     Save
   </app-button>
+  <app-flight-plans
+    (flightPlanClick)="onFlightPlanClick($event)"
+  ></app-flight-plans>
 </div>

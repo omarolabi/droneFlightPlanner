@@ -9,3 +9,8 @@ export interface PathCoordinates {
   endX: number;
   endY: number;
 }
+
+export interface FlightPlan {
+  pins: Array<PinObject>;
+  paths: Array<PathCoordinates>;
+}

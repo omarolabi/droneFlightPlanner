@@ -1,15 +1,15 @@
 @import "../../theme/mixins";
 @import "../../theme/variables";
 
-.map {
+.map-holder {
   width: $appWidth;
   position: relative;
 
-  .map__image {
+  .map-holder__image {
     width: $appWidth;
   }
 
-  .map__pin-holder {
+  .map-holder__pin-holder {
     width: $mapWidth;
     height: $mapHeight;
     position: absolute;

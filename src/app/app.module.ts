@@ -2,12 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { MapModule } from './map/map.module';
-import { FlightPlansModule } from './flight-plans/flight-plans.module';
+import { MapHolderModule } from './map-holder/map-holder.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, MapModule, FlightPlansModule],
+  imports: [BrowserModule, MapHolderModule],
   providers: [],
   bootstrap: [AppComponent]
 })

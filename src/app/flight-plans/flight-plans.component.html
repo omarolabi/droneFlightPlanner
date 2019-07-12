@@ -1,1 +1,7 @@
-<p>flight-plans works!</p>
+<div class="flight-plans">
+  <ul>
+    <li *ngFor="let flightPlan of flightPlans; let i = index">
+      <span (click)="loadFlightPlan(i)">Flight plan {{ i + 1 }}</span>
+    </li>
+  </ul>
+</div>
