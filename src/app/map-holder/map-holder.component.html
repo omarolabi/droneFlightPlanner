@@ -10,17 +10,21 @@
       [coordinates]="pathCoordinate"
     ></app-path>
   </div>
-  <app-button (buttonClick)="newFlightPlan()" [disabled]="editMode"
-    >New</app-button
-  >
-  <app-button (buttonClick)="clearFlightPlan()">Clear</app-button>
-  <app-button
-    (buttonClick)="saveFlightPlan()"
-    [type]="'secondary'"
-    [disabled]="this.pinPositions.length <= 1"
+  <div>
+    <input
+      type="text"
+      placeholder=""
+      [(ngModel)]="flightPlanName"
+      [disabled]="!editMode"
+    />
+  </div>
+  <button (click)="clearFlightPlan()">New</button>
+  <button
+    (click)="saveFlightPlan()"
+    [disabled]="pinPositions.length <= 1 || flightPlanName === '' || !editMode"
   >
     Save
-  </app-button>
+  </button>
   <app-flight-plans
     (flightPlanClick)="onFlightPlanClick($event)"
   ></app-flight-plans>

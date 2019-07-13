@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { MapHolderComponent } from './map-holder.component';
 import { PinModule } from '../pin/pin.module';
 import { PathModule } from '../path/path.module';
-import { ButtonModule } from '../button/button.module';
 import { FlightPlansModule } from '../flight-plans/flight-plans.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [MapHolderComponent],
@@ -13,8 +13,8 @@ import { FlightPlansModule } from '../flight-plans/flight-plans.module';
     CommonModule,
     PinModule,
     PathModule,
-    ButtonModule,
-    FlightPlansModule
+    FlightPlansModule,
+    FormsModule
   ],
   providers: []
 })

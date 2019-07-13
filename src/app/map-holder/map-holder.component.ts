@@ -16,6 +16,7 @@ export class MapHolderComponent implements OnInit {
   public pinPositions: Array<PinObject> = [];
   public pathCoordinates: Array<PathCoordinates> = [];
   public editMode = true;
+  public flightPlanName = '';
 
   constructor(private cd: ChangeDetectorRef) {}
 
@@ -34,22 +35,30 @@ export class MapHolderComponent implements OnInit {
   }
 
   public clearFlightPlan() {
+    this.flightPlanName = '';
     this.pinPositions = [];
     this.pathCoordinates = [];
-  }
-
-  public saveFlightPlan() {
-    console.log(this.pinPositions, this.pathCoordinates);
-  }
-
-  public newFlightPlan() {
-    this.clearFlightPlan();
     this.editMode = true;
   }
 
-  public onFlightPlanClick(event: FlightPlan) {
+  public saveFlightPlan() {
+    const localStorageData =
+      JSON.parse(localStorage.getItem('flightPlans')) || [];
+    const newFlightPlan: FlightPlan = {
+      name: this.flightPlanName,
+      pins: this.pinPositions,
+      paths: this.pathCoordinates
+    };
+    localStorageData.push(newFlightPlan);
+    localStorage.setItem('flightPlans', JSON.stringify(localStorageData));
     this.editMode = false;
+    console.log(localStorageData);
+  }
+
+  public onFlightPlanClick(event: FlightPlan) {
     this.clearFlightPlan();
+    this.editMode = false;
+    this.flightPlanName = event.name;
     this.pinPositions = event.pins;
     this.pathCoordinates = event.paths;
   }

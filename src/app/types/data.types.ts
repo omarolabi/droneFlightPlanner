@@ -11,6 +11,7 @@ export interface PathCoordinates {
 }
 
 export interface FlightPlan {
+  name: string;
   pins: Array<PinObject>;
   paths: Array<PathCoordinates>;
 }
