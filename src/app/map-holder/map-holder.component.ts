@@ -6,7 +6,6 @@ import {
 } from '@angular/core';
 import { PinObject, PathCoordinates, FlightPlan } from '../types/data.types';
 import { DataService } from '../services/data.service';
-import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-map-holder',
@@ -15,12 +14,16 @@ import { Observable, Subject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MapHolderComponent implements OnInit {
-  public pinPositions: Array<PinObject> = [];
-  public pathCoordinates: Array<PathCoordinates> = [];
   public editMode = true;
-  public flightPlanName = '';
+  public flightPlan: FlightPlan;
 
-  constructor(private cd: ChangeDetectorRef, private data: DataService) {}
+  constructor(private cd: ChangeDetectorRef, private data: DataService) {
+    this.flightPlan = {
+      name: '',
+      pins: [],
+      paths: []
+    };
+  }
 
   ngOnInit() {}
 
@@ -30,42 +33,46 @@ export class MapHolderComponent implements OnInit {
         x: event.x,
         y: event.y
       };
-      this.pinPositions.push(newPinPosition);
+      this.flightPlan.pins.push(newPinPosition);
       this.createNewPath(newPinPosition);
       this.cd.markForCheck();
     }
   }
 
   public clearFlightPlan() {
-    this.flightPlanName = '';
-    this.pinPositions = [];
-    this.pathCoordinates = [];
+    this.flightPlan = {
+      name: '',
+      pins: [],
+      paths: []
+    };
     this.editMode = true;
   }
 
   public saveFlightPlan() {
-    const localStorageData = this.data.getFlighPlans() || [];
+    const flightPlans = this.data.getFlighPlans() || [];
     const newFlightPlan: FlightPlan = {
-      name: this.flightPlanName,
-      pins: this.pinPositions,
-      paths: this.pathCoordinates
+      name: this.flightPlan.name,
+      pins: this.flightPlan.pins,
+      paths: this.flightPlan.paths
     };
-    localStorageData.push(newFlightPlan);
-    this.data.postFlightPLans(localStorageData);
+    flightPlans.push(newFlightPlan);
+    this.data.updateFlightPLans(flightPlans);
     this.editMode = false;
   }
 
   public onFlightPlanClick(event: FlightPlan) {
     this.clearFlightPlan();
     this.editMode = false;
-    this.flightPlanName = event.name;
-    this.pinPositions = event.pins;
-    this.pathCoordinates = event.paths;
+    this.flightPlan = {
+      name: event.name,
+      pins: event.pins,
+      paths: event.paths
+    };
   }
 
   private createNewPath(newPinPosition: PinObject) {
-    const pinCounter: number = this.pinPositions.length;
-    const oldPinPosition: PinObject = this.pinPositions[pinCounter - 2];
+    const pinCounter = this.flightPlan.pins.length;
+    const oldPinPosition: PinObject = this.flightPlan.pins[pinCounter - 2];
     if (pinCounter > 1) {
       const newPathCoordinates: PathCoordinates = {
         startX: oldPinPosition.x,
@@ -73,7 +80,7 @@ export class MapHolderComponent implements OnInit {
         endX: newPinPosition.x,
         endY: newPinPosition.y
       };
-      this.pathCoordinates.push(newPathCoordinates);
+      this.flightPlan.paths.push(newPathCoordinates);
     }
   }
 }

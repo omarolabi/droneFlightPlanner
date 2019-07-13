@@ -2,11 +2,11 @@
   <img src="assets/img/mock-map.png" alt="" class="map-holder__image" />
   <div class="map-holder__pin-holder" (click)="paintMarker($event)">
     <app-pin
-      *ngFor="let pinPosition of pinPositions; let i = index"
+      *ngFor="let pinPosition of flightPlan.pins; let i = index"
       [position]="pinPosition"
     ></app-pin>
     <app-path
-      *ngFor="let pathCoordinate of pathCoordinates; let i = index"
+      *ngFor="let pathCoordinate of flightPlan.paths; let i = index"
       [coordinates]="pathCoordinate"
     ></app-path>
   </div>
@@ -14,14 +14,16 @@
     <input
       type="text"
       placeholder=""
-      [(ngModel)]="flightPlanName"
+      [(ngModel)]="flightPlan.name"
       [disabled]="!editMode"
     />
   </div>
   <button (click)="clearFlightPlan()">New</button>
   <button
     (click)="saveFlightPlan()"
-    [disabled]="pinPositions.length <= 1 || flightPlanName === '' || !editMode"
+    [disabled]="
+      flightPlan.pins.length <= 1 || flightPlan.name === '' || !editMode
+    "
   >
     Save
   </button>

@@ -14,7 +14,7 @@ export class DataService {
     return JSON.parse(localStorage.getItem('flightPlans'));
   }
 
-  public postFlightPLans(data): void {
+  public updateFlightPLans(data): void {
     localStorage.setItem('flightPlans', JSON.stringify(data));
     this.storageSub.next();
   }
