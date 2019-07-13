@@ -1,0 +1,35 @@
+<div class="map-holder">
+  <img src="assets/img/mock-map.png" alt="" class="map-holder__image" />
+  <div class="map-holder__pin-holder" (click)="paintMarker($event)">
+    <app-pin
+      *ngFor="let pinPosition of flightPlan.pins; let i = index"
+      [position]="pinPosition"
+    ></app-pin>
+    <app-path
+      *ngFor="let pathCoordinate of flightPlan.paths; let i = index"
+      [coordinates]="pathCoordinate"
+    ></app-path>
+  </div>
+  <div class="map-holder__controls">
+    <button class="button" (click)="clearFlightPlan()">New</button>
+    <input
+      type="text"
+      class="controls__input-name"
+      id="name"
+      placeholder="Assign new name"
+      [(ngModel)]="flightPlan.name"
+      [disabled]="!editMode"
+    />
+    <button
+      class="button"
+      (click)="saveFlightPlan()"
+      [disabled]="flightPlan.pins.length <= 1 || flightPlan.name === ''"
+      *ngIf="editMode"
+    >
+      Save
+    </button>
+  </div>
+  <app-flight-plans
+    (flightPlanClick)="onFlightPlanClick($event)"
+  ></app-flight-plans>
+</div>

@@ -1,1 +1,16 @@
-<p>flight-plans works!</p>
+<div class="flight-plans">
+  <h2 class="flight-plans__title">Saved flight plans:</h2>
+  <ul class="flight-plans__list">
+    <li class="list__placeholder" *ngIf="flightPlans.length === 0">
+      No saved flight plans
+    </li>
+    <li
+      class="list__list-element"
+      *ngFor="let flightPlan of flightPlans; let i = index"
+    >
+      <span class="list-element__plan" (click)="loadFlightPlan(i)">{{
+        flightPlan.name
+      }}</span>
+    </li>
+  </ul>
+</div>
