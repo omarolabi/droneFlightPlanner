@@ -1,0 +1,22 @@
+// Return size REM from given size in PX
+@function calculateRem($size) {
+  $remSize: $size / 16;
+  @return $remSize * 1rem;
+}
+
+// Return relative line-height from font-size and line-height in PX
+@function calculateLH($size, $lHeight) {
+  $lineHeight: $lHeight / $size;
+  @return $lineHeight;
+}
+
+// CALCULATE FONT-SIZE AND LINE-HEIGHT
+// $size sets the font-size and must be expressed in PX without units.
+// $lHeight sets the line-height and must be expressed in PX without units.
+// example:
+// @include calcFontSize(27, 31);
+@mixin calcFontSize($size, $lHeight) {
+  font-size: #{$size}px;
+  font-size: calculateRem($size);
+  line-height: calculateLH($size, $lHeight);
+}

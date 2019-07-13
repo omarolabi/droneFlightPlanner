@@ -18,3 +18,46 @@ body {
 .app-container {
   width: $appWidth;
 }
+
+input[type="text"] {
+  @include calcFontSize(16, 16);
+  padding: 8px 5px;
+  border: 1px solid $mediumGray;
+  color: $black;
+
+  &:disabled {
+    border: 1px solid transparent;
+    background: 0;
+    color: $black;
+    font-weight: bold;
+  }
+}
+
+.button {
+  @include calcFontSize(16, 16);
+  appearance: none;
+  background: $mainColor;
+  padding: 10px 15px;
+  text-align: center;
+  display: inline-block;
+  border: 0;
+  color: $white;
+  cursor: pointer;
+
+  &:active,
+  &:focus,
+  &:hover {
+    background: lighten($mainColor, 5%);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+
+    &:active,
+    &:focus,
+    &:hover {
+      background: $mainColor;
+    }
+  }
+}

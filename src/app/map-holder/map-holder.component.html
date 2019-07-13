@@ -10,23 +10,25 @@
       [coordinates]="pathCoordinate"
     ></app-path>
   </div>
-  <div>
+  <div class="map-holder__controls">
+    <button class="button" (click)="clearFlightPlan()">New</button>
     <input
       type="text"
-      placeholder=""
+      class="controls__input-name"
+      id="name"
+      placeholder="Assign new name"
       [(ngModel)]="flightPlan.name"
       [disabled]="!editMode"
     />
+    <button
+      class="button"
+      (click)="saveFlightPlan()"
+      [disabled]="flightPlan.pins.length <= 1 || flightPlan.name === ''"
+      *ngIf="editMode"
+    >
+      Save
+    </button>
   </div>
-  <button (click)="clearFlightPlan()">New</button>
-  <button
-    (click)="saveFlightPlan()"
-    [disabled]="
-      flightPlan.pins.length <= 1 || flightPlan.name === '' || !editMode
-    "
-  >
-    Save
-  </button>
   <app-flight-plans
     (flightPlanClick)="onFlightPlanClick($event)"
   ></app-flight-plans>

@@ -7,6 +7,7 @@
 
   .map-holder__image {
     width: $appWidth;
+    display: block;
   }
 
   .map-holder__pin-holder {
@@ -16,5 +17,14 @@
     top: 0;
     left: 0;
     z-index: 1;
+  }
+
+  .map-holder__controls {
+    padding: 10px 15px;
+    background: $lightGray;
+  }
+
+  .controls__input-name {
+    margin: 0 5px 0 15px;
   }
 }
