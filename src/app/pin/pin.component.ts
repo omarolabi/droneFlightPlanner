@@ -4,7 +4,7 @@ import {
   Input,
   ChangeDetectionStrategy
 } from '@angular/core';
-import { PinObject } from '../types/data.types';
+import { PinObject, StylePosition } from '../types/data.types';
 
 @Component({
   selector: 'app-pin',
@@ -15,9 +15,7 @@ import { PinObject } from '../types/data.types';
 export class PinComponent implements OnInit {
   @Input() position: PinObject;
 
-  public styles = {};
-
-  constructor() {}
+  public styles: StylePosition;
 
   ngOnInit() {
     this.styles = {

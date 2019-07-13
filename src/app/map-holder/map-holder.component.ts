@@ -1,6 +1,5 @@
 import {
   Component,
-  OnInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef
 } from '@angular/core';
@@ -13,19 +12,18 @@ import { DataService } from '../services/data.service';
   styleUrls: ['./map-holder.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MapHolderComponent implements OnInit {
-  public editMode = true;
+export class MapHolderComponent {
+  public editMode: boolean;
   public flightPlan: FlightPlan;
 
   constructor(private cd: ChangeDetectorRef, private data: DataService) {
+    this.editMode = true;
     this.flightPlan = {
       name: '',
       pins: [],
       paths: []
     };
   }
-
-  ngOnInit() {}
 
   public paintMarker(event) {
     if (this.editMode) {

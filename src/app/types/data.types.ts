@@ -15,3 +15,8 @@ export interface FlightPlan {
   pins: Array<PinObject>;
   paths: Array<PathCoordinates>;
 }
+
+export interface StylePosition {
+  'left.px': number;
+  'top.px': number;
+}

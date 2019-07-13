@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { PathCoordinates } from '../types/data.types';
 
 @Component({
@@ -6,9 +6,6 @@ import { PathCoordinates } from '../types/data.types';
   templateUrl: './path.component.html',
   styleUrls: ['./path.component.scss']
 })
-export class PathComponent implements OnInit {
+export class PathComponent {
   @Input() coordinates: PathCoordinates;
-  constructor() {}
-
-  ngOnInit() {}
 }
