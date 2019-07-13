@@ -5,6 +5,7 @@ import { PinModule } from '../pin/pin.module';
 import { PathModule } from '../path/path.module';
 import { FlightPlansModule } from '../flight-plans/flight-plans.module';
 import { FormsModule } from '@angular/forms';
+import { DataService } from '../services/data.service';
 
 @NgModule({
   declarations: [MapHolderComponent],
@@ -16,6 +17,6 @@ import { FormsModule } from '@angular/forms';
     FlightPlansModule,
     FormsModule
   ],
-  providers: []
+  providers: [DataService]
 })
 export class MapHolderModule {}

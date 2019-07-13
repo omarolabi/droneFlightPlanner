@@ -5,6 +5,8 @@ import {
   ChangeDetectorRef
 } from '@angular/core';
 import { PinObject, PathCoordinates, FlightPlan } from '../types/data.types';
+import { DataService } from '../services/data.service';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-map-holder',
@@ -18,7 +20,7 @@ export class MapHolderComponent implements OnInit {
   public editMode = true;
   public flightPlanName = '';
 
-  constructor(private cd: ChangeDetectorRef) {}
+  constructor(private cd: ChangeDetectorRef, private data: DataService) {}
 
   ngOnInit() {}
 
@@ -42,17 +44,15 @@ export class MapHolderComponent implements OnInit {
   }
 
   public saveFlightPlan() {
-    const localStorageData =
-      JSON.parse(localStorage.getItem('flightPlans')) || [];
+    const localStorageData = this.data.getFlighPlans() || [];
     const newFlightPlan: FlightPlan = {
       name: this.flightPlanName,
       pins: this.pinPositions,
       paths: this.pathCoordinates
     };
     localStorageData.push(newFlightPlan);
-    localStorage.setItem('flightPlans', JSON.stringify(localStorageData));
+    this.data.postFlightPLans(localStorageData);
     this.editMode = false;
-    console.log(localStorageData);
   }
 
   public onFlightPlanClick(event: FlightPlan) {
